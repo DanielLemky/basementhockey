@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="row">
+        <div class="col text-center">
+            <h1>Record Result</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <%= form_with(url: game_results_path(@game), method: :post) do |form| %>
+                <div class="row">
+                    <div class="col text-center">
+                        <%= form.label "#{User.find(@game.away_team_id).team_name} Goals" %>
+                        <%= form.text_field :away_goals, class: "form-control" %>
+                    </div>
+                    <div class="col text-center">
+                        <%= form.label "#{User.find(@game.home_team_id).team_name} Goals" %>
+                        <%= form.text_field :home_goals, class: "form-control" %>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <%= form.label "Did the game go into overtime?" %>
+                        <%= form.select(:overtime, options_for_select([['No', 0], ['Yes', 1]]), {}, { class: "form-select" } ) %>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <%= form.label "Did the game go into a shootout?" %>
+                        <%= form.select(:shootout, options_for_select([['No', 0], ['Yes', 1]]), {}, { class: "form-select" } ) %>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <%= form.submit "Save Result", class: "btn btn-primary" %>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div>
