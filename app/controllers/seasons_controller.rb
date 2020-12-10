@@ -1,4 +1,6 @@
 class SeasonsController < ApplicationController
+    before_action :authenticate_user!
+    
     def new
         @season = Season.new
     end
@@ -11,6 +13,24 @@ class SeasonsController < ApplicationController
     end
 
     def edit
+    end
+
+    def standings
+        @season = Season.find(params[:season_id])
+        @teams = @season.users
+        @team_stats = TeamStat.where(season_id: @season.id).order(points: :desc, goal_difference: :desc)
+    end
+
+    def new_user
+        @season = Season.find(params[:season_id])
+        @users = User.all
+    end
+
+    def add_user
+        @season = Season.find(params[:season_id])
+        @user = User.find(params[:user])
+        @season.users << @user
+        redirect_to @season
     end
 
     def create

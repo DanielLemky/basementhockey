@@ -1,0 +1,21 @@
+<div class="col-md-6">
+    <div id="next-game" class="card">
+        <div class="card-body">
+            <h3 class="card-title">My Next Game</h3>
+            <div class="row"> 
+                <div class="col text-center">
+                    <%= User.find(@next_game.away_team_id).team_name %>
+                </div>
+                <div class="col text-center">
+                    vs
+                </div>
+                <div class="col text-center">
+                    <%= User.find(@next_game.home_team_id).team_name %>
+                </div>
+            </div>
+            <div class="text-center">
+                <%= link_to 'View My Full Schedule', season_my_games_path(season) %>
+            </div>
+        </div>
+    </div>
+</div>

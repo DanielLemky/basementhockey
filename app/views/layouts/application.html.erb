@@ -4,6 +4,7 @@
     <title>Basementhockey</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -11,8 +12,25 @@
   </head>
 
   <body>
-    <div class="container">
-      <%= yield %>
+    <nav class="navbar">
+      <div class="container-fluid">
+        <%= link_to root_path, class: "navbar-brand" do %>
+          <%= image_tag('BHL.png') %>
+        <% end %>
+        <div class="user">
+          <%if user_signed_in? %>
+            <%= current_user.first_name %>
+          <% end %>
+        </div>
+      </div>
+    </nav>
+    <%= yield %>
+    <div class="container text-center">
+      <% if user_signed_in? %>
+        <div class="logout">
+          <%= link_to("Logout", destroy_user_session_path, method: :delete) %>
+        </div>
+      <% end %>
     </div>
   </body>
 </html>

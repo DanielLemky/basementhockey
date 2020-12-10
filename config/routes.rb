@@ -6,8 +6,15 @@ Rails.application.routes.draw do
 
   root :to => 'dashboard#index'
 
-  resources :seasons
-  resources :games do
+  resources :seasons do
+    get :standings, as: :standings
+    get :new_user
+    post :add_user
+    get "/games/my", as: :my_games
+    resources :games, only: [:new, :index, :create]
+  end
+
+  resources :games, except: [:new, :index, :create] do
     resources :results
   end
 

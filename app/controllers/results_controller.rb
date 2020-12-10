@@ -1,4 +1,5 @@
 class ResultsController < ApplicationController
+    before_action :authenticate_user!
 
     def new
         @game = Game.find(params[:game_id])

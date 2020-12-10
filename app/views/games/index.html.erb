@@ -1,36 +1,47 @@
-<table class="table">
-    <thead>
-        <tr>
-            <th>Away</th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th class="text-end">Home</th>
-        </tr>
-    </thead>
-    <tbody>
-        <% @games.each do |game| %>
-        <tr>
-            <td><%= User.find(game.away_team_id).team_name %></td>
-            <td class="text-end">
-                <% if game.result %>
-                    <%= game.result.away_goals %>
-                <% end %>
-            </td>
-            <td class="text-center">
-            <% if game.result %>
-                -
-            <% else %>
-                <%= link_to 'Record Result', new_game_result_path(game) %>
-            <% end %>
-            </td>
-            <td>
-                <% if game.result %>
-                    <%= game.result.home_goals %>
-                <% end %>
-            </td>
-            <td class="text-end"><%= User.find(game.home_team_id).team_name %></td>
-        </tr>
-        <% end %>
-    </tbody>
-</table>
+<div class="container">
+    <h1>Games</h1>
+    <div class="card">
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Away</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th class="text-end">Home</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @games.each do |game| %>
+                    <tr>
+                        <td><%= User.find(game.away_team_id).team_name %></td>
+                        <td class="text-end">
+                            <% if game.result %>
+                                <%= game.result.away_goals %>
+                            <% end %>
+                        </td>
+                        <td class="text-center">
+                        <% if game.result %>
+                            -
+                        <% else %>
+                            <% if current_user.id == game.away_team_id or current_user.id == game.home_team_id %>
+                                <%= link_to 'Record Result', new_game_result_path(game) %>
+                            <% else %>
+                                -
+                            <% end %>
+                        <% end %>
+                        </td>
+                        <td>
+                            <% if game.result %>
+                                <%= game.result.home_goals %>
+                            <% end %>
+                        </td>
+                        <td class="text-end"><%= User.find(game.home_team_id).team_name %></td>
+                    </tr>
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

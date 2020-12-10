@@ -1,0 +1,36 @@
+<div class="col-md-6">
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-title">Standings</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Team</th>
+                        <th scope="col">W</th>
+                        <th scope="col">L</th>
+                        <th scope="col">OTL</th>
+                        <th scope="col">PTS</th>
+                        <th scope="col">GP</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% season.users.each do |user| %>
+                    <tr>
+                        <td>1</td>
+                        <td><%= user.team_name %></td>
+                        <td>5</td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>12</td>
+                        <td>8</td>
+                    </tr>
+                    <% end %>
+                </tbody>
+            </table>
+            <div class="text-center">
+                <%= link_to 'View Full Standings', season_standings_path(season) %>
+            </div>
+        </div>
+    </div>
+</div>

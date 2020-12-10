@@ -8,4 +8,5 @@ class User < ApplicationRecord
   has_many :seasons, through: :season_users
   has_many :games
   has_many :results, through: :games
+  has_many :team_stats
 end

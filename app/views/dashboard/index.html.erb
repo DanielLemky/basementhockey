@@ -1,26 +1,27 @@
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Team</th>
-            <th scope="col">W</th>
-            <th scope="col">L</th>
-            <th scope="col">OTL</th>
-            <th scope="col">PTS</th>
-            <th scope="col">GP</th>
-        </tr>
-    </thead>
-    <tbody>
-        <% @users.each do |user| %>
-        <tr>
-            <td>1</td>
-            <td><%= user.team_name %></td>
-            <td>5</td>
-            <td>1</td>
-            <td>2</td>
-            <td>12</td>
-            <td>8</td>
-        </tr>
+<div id="dashboard" class="container">
+
+    <% if @seasons.any? %>
+
+        <% @seasons.each do |season| %>
+            <h2><%= season.name %> Season</h2>
+            <div class="row">
+                <%= render partial: 'next_game', locals: { season: season } %>
+                <%= render partial: 'standings', locals: { season: season } %>
+                <%= render partial: 'latest_results', locals: { season: season } %>
+                <%= render partial: 'upcoming_games', locals: { season: season } %>
+            </div>
         <% end %>
-    </tbody>
-</table>
+
+    <% else %>
+
+        <div class="card">
+            <div class="card-body text-center">
+                <h1>Welcome!</h1>
+                <p>Thanks for creating an account!</p>
+                <p>You haven't been added to any seasons yet but that should be coming soon.</p>
+            </div>
+        </div>
+
+    <% end %>
+
+</div>
