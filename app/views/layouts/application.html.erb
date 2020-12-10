@@ -12,12 +12,12 @@
   </head>
 
   <body>
-    <nav class="navbar">
+    <nav class="navbar navbar-dark bg-dark">
       <div class="container-fluid">
         <%= link_to root_path, class: "navbar-brand" do %>
-          <%= image_tag('BHL.png') %>
+          <%= image_tag('logo.svg') %>
         <% end %>
-        <div class="user">
+        <div class="beta">
           Beta
         </div>
       </div>
@@ -32,12 +32,20 @@
     <% end %>
     
     <%= yield %>
-    <div class="container text-center">
-      <% if user_signed_in? %>
-        <div class="logout">
-          <%= link_to("Logout", destroy_user_session_path, method: :delete) %>
+    <% if user_signed_in? %>
+      <div id="footer-links" class="container">
+        <div class="row">
+          <div class="col">
+            <% unless current_page?(root_path) %>
+                <%= link_to "< Back to Dashboard", root_path, id: "back-to-dashboard" %>
+            <% end %>
+          </div>
+          <div class="col text-end">
+            <%= link_to("Logout", destroy_user_session_path, method: :delete) %>
+          </div>
         </div>
-      <% end %>
+      </div>
+    <% end %>
     </div>
   </body>
 </html>

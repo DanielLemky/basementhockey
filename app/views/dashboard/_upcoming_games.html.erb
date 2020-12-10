@@ -2,19 +2,17 @@
     <div id="upcoming-games" class="card">
         <div class="card-body">
             <h3 class="card-title">Other Upcoming Games</h3>
-            <% season.games.limit(5).where.not('away_team_id=? OR home_team_id=?', current_user.id, current_user.id).each do |game| %>
-                <div class="row"> 
-                    <div class="col text-center">
-                        <%= User.find(game.away_team_id).team_name %>
-                    </div>
-                    <div class="col text-center">
-                        vs
-                    </div>
-                    <div class="col text-center">
-                        <%= User.find(game.home_team_id).team_name %>
-                    </div>
-                </div>
-            <% end %>
+            <table class="table">
+                <tbody>
+                    <% season.games.limit(5).where.not('away_team_id=? OR home_team_id=?', current_user.id, current_user.id).each do |game| %>
+                        <tr>
+                            <td><%= User.find(game.away_team_id).team_name %></td>
+                            <td class="text-center">vs</td>
+                            <td class="text-end"><%= User.find(game.home_team_id).team_name %></td>
+                        </tr>
+                    <% end %>
+                </tbody>
+            </table>
             <div class="text-center">
                 <%= link_to 'View Full Schedule', season_games_path(season) %>
             </div>

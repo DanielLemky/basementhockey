@@ -15,6 +15,8 @@ class GamesController < ApplicationController
 
     def index
         @season = Season.find(params[:season_id])
+        @teams = @season.users
+
         if current_user.seasons.exists?(@season.id)
             @games = Game.where(season_id: @season.id)
         else

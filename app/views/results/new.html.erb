@@ -22,8 +22,6 @@
                         <%= form.label "Did the game go into overtime?" %>
                         <%= form.select(:overtime, options_for_select([['No', 0], ['Yes', 1]]), {}, { class: "form-select" } ) %>
                     </div>
-                </div>
-                <div class="row">
                     <div class="col">
                         <%= form.label "Did the game go into a shootout?" %>
                         <%= form.select(:shootout, options_for_select([['No', 0], ['Yes', 1]]), {}, { class: "form-select" } ) %>

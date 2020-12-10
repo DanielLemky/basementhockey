@@ -6,6 +6,7 @@
             <h2><%= season.name %> Season</h2>
             <div class="row">
                 <%= render partial: 'next_game', locals: { season: season } %>
+                <%= render partial: 'current_week', locals: { season: season } %>
                 <%= render partial: 'standings', locals: { season: season } %>
                 <%= render partial: 'latest_results', locals: { season: season } %>
                 <%= render partial: 'upcoming_games', locals: { season: season } %>

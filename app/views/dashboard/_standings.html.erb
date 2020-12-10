@@ -15,15 +15,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <% season.users.each do |user| %>
+                    <% @team_stats = TeamStat.where(season_id: season.id).order(points: :desc, goal_difference: :desc) %>
+                    <% @team_stats.each_with_index do |team, index| %>
                     <tr>
-                        <td>1</td>
-                        <td><%= user.team_name %></td>
-                        <td>5</td>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>12</td>
-                        <td>8</td>
+                        <td><%= index + 1 %></td>
+                            <td><%= team.user.team_name %></td>
+                            <td><%= team.wins %></td>
+                            <td><%= team.losses %></td>
+                            <td><%= team.overtime_losses %></td>
+                            <td><%= team.points %></td>
+                            <td><%= team.wins + team.losses + team.overtime_losses %></td>
                     </tr>
                     <% end %>
                 </tbody>

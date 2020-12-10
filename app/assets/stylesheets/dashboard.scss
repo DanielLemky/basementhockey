@@ -2,34 +2,63 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
+@import url('https://fonts.googleapis.com/css2?family=Sintony:wght@400;700&display=swap');
+
 body {
-    background-color: #F8F9FC
+    background-color: #F8F9FC;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    h1, h2, h3, h4, h5 {
+        font-family: 'Sintony', sans-serif;
+        font-weight: bold;
+    }
+    a {
+        color: #4f46e5
+    }
 }
 h1 {
-    font-size: 48px;
+    font-size: 36px;
     margin-bottom: 30px;
 }
 
-.user {
-    margin-right: 20px;
-}
-
-.navbar {
-    background-color: #fff;
-    box-shadow: 0px 5px 20px 5px #e8e8e8;
-    margin-bottom: 50px;
-    .navbar-brand {
-        max-width: 150px;
-        img {
-            width: 100%;
+.table {
+    td {
+        height: 50px;
+        vertical-align: middle;
+    }
+    &.games {
+        td {    
+            height: 80px;
+        }
+        .won {
+            color: #4f46e5;
+        }
+        .week-counter {
+            // text-transform: uppercase;
+            color: #4f46e5;
+            font-size: 24px;
         }
     }
 }
 
+.beta {
+    margin-right: 20px;
+}
+
+.navbar {
+    margin-bottom: 50px;
+    .navbar-brand {
+        max-width: 50px;
+        img {
+            width: 100%;
+        }
+    }
+    color: #fff;
+}
+
 #dashboard {
     h2 {
-        font-size: 48px;
-        margin-bottom: 30px;
+        font-size: 32px;
+        margin-bottom: 20px;
     }
 }
 
@@ -39,6 +68,7 @@ h1 {
     padding: 5px 10px;
     .card-title {
         margin-bottom: 20px;
+        font-size: 24px;
     }
     .table {
         margin-bottom: 30px;
@@ -52,40 +82,100 @@ h1 {
 
 .game-status {
     font-size: 14px;
+    color: #444;
 }
 
 #next-game {
+    overflow: hidden;
+    padding: 0;
+    .card-body {
+        padding: 0;
+    }
+    .middle {
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
     .team {
-        margin: 0 auto;
+        // margin: 0 auto;
         padding: 30px 20px;
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
-        border-radius: 15px;
+        // border-radius: 15px;
         background-position: center;
         background-size: cover;
-        margin-top: 30px;
-        margin-bottom: 30px;
+        // margin-top: 30px;
+        // margin-bottom: 30px;
     }
     .team-name {
         color: #fff;
-        font-size: 24px;
+        font-size: 32px;
         font-weight: bold;
         text-transform: uppercase;
         font-style: italic;
     }
     .vs {
-        font-size: 72px;
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 18px;
         line-height: 1;
+        // border: 2px solid #000;
+        border-radius: 50%;
+        padding: 10px;
+        display: inline-block;
+        box-sizing: border-box;
+    }
+    .home-away {
+        display: block;
+        color: #fff;
+    }
+    .no-games {
+        padding: 30px;
+        p {
+            margin-bottom: 0;
+        }
     }
 }
 
-.btn {
-    margin-top: 20px;
-}
-
-form {
+.reduced-width {
     max-width: 800px;
     margin: 0 auto;
     
+}
+
+.btn.btn-primary {
+    background-color: #4f46e5;
+}
+
+@media only screen and (max-width: 600px) {
+    #next-game {
+        .middle {
+            background-color: #000;
+            color: #fff;
+            border-bottom: 2px solid #4f46e5;
+            border-top: 2px solid #4f46e5;
+            padding:10px;
+        }
+    }
+    #next-game-button {
+        margin-top: 0;
+        margin-bottom: 30px;
+    }
+}
+
+#logo {
+    font-weight: bold;
+    font-family: 'Sintony', sans-serif;
+    color: #4f46e5;
+    font-size: 32px;
+    margin-left: 30px;
+}
+
+#footer-links {
+    margin-top: 100px;
+    margin-bottom: 50px;
+    a {
+    text-decoration: none;
+    }
 }
