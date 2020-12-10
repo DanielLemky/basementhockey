@@ -18,10 +18,37 @@
             <div class="card-body text-center">
                 <h1>Welcome!</h1>
                 <p>Thanks for creating an account!</p>
-                <p>You haven't been added to any seasons yet but that should be coming soon.</p>
+                <p>You haven't been added to any seasons yet. Stay tuned!</p>
             </div>
         </div>
 
+    <% end %>
+
+    <% if current_user.email == 'daniel@lemky.ca' %>
+        <div class="admin row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title">Admin Controls</h2>
+                        <table class="table">
+                            <thead>
+                                <th>Seasons</th>
+                            </thead>
+                            <tbody>
+                                <% Season.all.each do |admin_season| %>
+                                    <tr>
+                                        <td><%= link_to admin_season.name, admin_season %></td>
+                                    </th>
+                                <% end %>
+                            </tbody>
+                        </table>
+                        <div>
+                            <%= link_to "Create New Season", new_season_path %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     <% end %>
 
 </div>

@@ -18,12 +18,19 @@
           <%= image_tag('BHL.png') %>
         <% end %>
         <div class="user">
-          <%if user_signed_in? %>
-            <%= current_user.first_name %>
-          <% end %>
+          Beta
         </div>
       </div>
     </nav>
+
+    <% flash.each do |type, msg| %>
+      <div class="container">
+        <div class="alert alert-<%= type %> text-center">
+          <%= msg %>
+        </div>
+      </div>
+    <% end %>
+    
     <%= yield %>
     <div class="container text-center">
       <% if user_signed_in? %>

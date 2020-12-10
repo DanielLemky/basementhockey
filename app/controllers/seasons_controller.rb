@@ -29,8 +29,14 @@ class SeasonsController < ApplicationController
     def add_user
         @season = Season.find(params[:season_id])
         @user = User.find(params[:user])
-        @season.users << @user
-        redirect_to @season
+        if @season.users.exists?(@user.id)
+            flash.alert = "User is already added to this season"
+            redirect_to season_new_user_path(@season)
+        else
+            @season.users << @user
+            @user.team_stats.create(season_id: @season.id, wins: 0, losses: 0, overtime_losses: 0, points: 0, goals_for: 0, goals_against: 0, goal_difference: 0 )
+            redirect_to @season
+        end
     end
 
     def create

@@ -18,7 +18,6 @@ ActiveRecord::Schema.define(version: 2020_12_09_072319) do
   create_table "games", force: :cascade do |t|
     t.bigint "home_team_id"
     t.bigint "away_team_id"
-    t.integer "status"
     t.bigint "season_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

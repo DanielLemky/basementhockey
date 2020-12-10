@@ -1,9 +1,50 @@
-<h2><%= @season.name %></h2>
-
-<div class="row">
-    <div class="col">
-        <p>Start Date: <%= @season.start_date %></p>
-        <p>Type: <%= @season.season_type %></p>
-        <p>Games Per Week: <%= @season.games_per_week %></p>
+<div class="container">
+    <h1><%= @season.name %></h1>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">Settings</h3>
+                    <div class="row">
+                        <div class="col">
+                            <p>Start Date: <%= @season.start_date %></p>
+                            <p>Type: <%= @season.season_type %></p>
+                            <p>Games Per Week: <%= @season.games_per_week %></p>
+                        </div>
+                    </div>
+                    <% if current_user.email == 'daniel@lemky.ca' %>
+                        <div class="admin text-center">
+                            <%= link_to "Add Games to Season", new_season_game_path(@season) %>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">Users</h3>
+                    <table class="table">
+                        <thead>
+                            <th>Name</th>
+                            <th>Email</th>
+                        </thead>
+                        <tbody>
+                            <% @season.users.each do |user| %>
+                                <tr>
+                                    <td><%= user.first_name %> <%= user.last_name %></td>
+                                    <td><%= user.email %></td>
+                                </tr>
+                            <% end %>
+                        </tbody>
+                    </table>
+                    <% if current_user.email == 'daniel@lemky.ca' %>
+                        <div class="admin text-center">
+                            <%= link_to "Add Users to Season", season_new_user_path(@season) %>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

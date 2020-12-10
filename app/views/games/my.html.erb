@@ -1,6 +1,8 @@
 <div class="container">
     <h1>My Games</h1>
     <h2><%= @season.name %> Season</h2>
+    <div class="card">
+        <div class="card-body">
     <table class="table">
         <thead>
             <tr>
@@ -20,9 +22,15 @@
                         <%= game.result.away_goals %>
                     <% end %>
                 </td>
-                <td class="text-center">
+                <td class="text-center game-status">
                 <% if game.result %>
-                    -
+                    <% if game.result.shootout == 1 %>
+                        FINAL(SO)
+                    <% elsif game.result.overtime == 1 %>
+                        FINAL(OT)
+                    <% else %>
+                        FINAL
+                    <% end %>
                 <% else %>
                     <% if current_user.id == game.away_team_id or current_user.id == game.home_team_id %>
                         <%= link_to 'Record Result', new_game_result_path(game) %>
@@ -41,4 +49,6 @@
             <% end %>
         </tbody>
     </table>
+    </div>
+    </div>
 </div>

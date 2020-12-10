@@ -24,9 +24,9 @@
                             <td><%= team.user.team_name %></td>
                             <td><%= team.wins %></td>
                             <td><%= team.losses %></td>
-                            <td><%= team.overtime_losses + team.shootout_losses %></td>
-                            <td><%= team.wins * 2 + team.overtime_losses + team.shootout_losses %></td>
-                            <td><%= team.wins + team.losses + team.overtime_losses + team.shootout_losses %></td>
+                            <td><%= team.overtime_losses %></td>
+                            <td><%= team.points %></td>
+                            <td><%= team.wins + team.losses + team.overtime_losses %></td>
                             <td><%= team.goals_for %></td>
                             <td><%= team.goals_against %></td>
                             <td><%= team.goals_for - team.goals_against %></td>

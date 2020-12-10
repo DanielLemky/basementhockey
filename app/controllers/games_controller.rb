@@ -15,7 +15,11 @@ class GamesController < ApplicationController
 
     def index
         @season = Season.find(params[:season_id])
-        @games = Game.where(season_id: @season.id)
+        if current_user.seasons.exists?(@season.id)
+            @games = Game.where(season_id: @season.id)
+        else
+            redirect_to root_path
+        end
     end
 
     def my
@@ -26,11 +30,17 @@ class GamesController < ApplicationController
     def create
         @game = Game.new(game_params)
 
-        if @game.save
-            redirect_to season_games_path(@game.season_id)
+        unless @game.home_team_id == @game.away_team_id
+            if @game.save
+                redirect_to season_games_path(@game.season_id)
+            else
+                redirect_to new_game_path
+            end
         else
-            redirect_to new_game_path
+            flash.alert = "Error: You selected the same team for away and home."
+            redirect_to new_season_game_path(@game.season_id)
         end
+
     end
 
     def update
