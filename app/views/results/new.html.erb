@@ -4,22 +4,22 @@
     </div>
     <div class="row">
         <div class="col">
-            <%= form_with(url: game_results_path(@game), method: :post) do |form| %>
+            <%= form_with(url: game_result_path(@game), method: :post) do |form| %>
                 <div class="row">
                     <div class="col-12 mb-3">
                         <h3>Score</h3>
                     </div>
                     <div class="col mb-3">
                         <%= form.label "#{User.find(@game.away_team_id).team_name} Goals", class: "form-label" %>
-                        <%= form.text_field :away_goals, class: "form-control" %>
+                        <%= form.number_field :away_goals, class: "form-control", required: :true, min: 0 %>
                     </div>
                     <div class="col mb-3">
                         <%= form.label "#{User.find(@game.home_team_id).team_name} Goals", class: "form-label" %>
-                        <%= form.text_field :home_goals, class: "form-control" %>
+                        <%= form.number_field :home_goals, class: "form-control", required: :true, min: 0 %>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-12 mt-4 mb-3">
+                    <div class="col-12 mt-3 mb-3">
                         <h3>OT / Shootout</h3>
                     </div>
                     <div class="col mb-3">
@@ -29,6 +29,17 @@
                     <div class="col mb-3">
                         <%= form.label "Did the game go into a shootout?", class: "form-label" %>
                         <%= form.select(:shootout, options_for_select([['No', 0], ['Yes', 1]]), {}, { class: "form-select" } ) %>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <%= form.label "Game Result Photo", class: "form-label" %>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <div class="input-group">
+                            <%= form.file_field :game_photo, class: "form-control", required: :true %>
+                        </div>
+                        <span class="form-text">Take a photo of your TV with the final score.</span>
                     </div>
                 </div>
                 <div class="row">

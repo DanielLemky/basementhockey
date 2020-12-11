@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   end
 
   resources :games, except: [:new, :index, :create] do
-    resources :results
+    resource :result
   end
 
 end

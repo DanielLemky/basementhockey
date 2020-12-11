@@ -31,12 +31,14 @@
         </td>
         <td class="text-center game-status fw-bold">
         <% if game.result %>
-            <% if game.result.shootout == 1 %>
-                FINAL(SO)
-            <% elsif game.result.overtime == 1 %>
-                FINAL(OT)
-            <% else %>
-                FINAL
+            <%= link_to game_result_path(game.id) do %>
+                <% if game.result.shootout == 1 %>
+                    FINAL(SO)
+                <% elsif game.result.overtime == 1 %>
+                    FINAL(OT)
+                <% else %>
+                    FINAL
+                <% end %>
             <% end %>
         <% else %>
             <% if (current_user.id == game.away_team_id or current_user.id == game.home_team_id) and (@season.start_date.step(Date.today, 7).count >= week_number) %>
