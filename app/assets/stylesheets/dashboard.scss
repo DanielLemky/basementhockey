@@ -227,6 +227,6 @@ margin-top: 50px;
     max-height: 500px;
 }
 
-.card.standings {
+.card.standings, .card.overflow-scroll {
     overflow: scroll;
 }
