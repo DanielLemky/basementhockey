@@ -38,17 +38,22 @@
       <% if user_signed_in? %>
       <div id="footer-links" class="container">
         <div class="row">
-          <div class="col">
+          <div class="col-md text-center text-md-start">
             <% unless current_page?(root_path) %>
                 <%= link_to  "Return to Dashboard", root_path, id: "back-to-dashboard" %>
             <% end %>
           </div>
-          <div class="col text-center">
+          <div class="col-md text-center">
+            <div>
+              <a class="typeform-share link" href="https://form.typeform.com/to/txKqjBGl?typeform-medium=embed-snippet" data-mode="popup" style="color:#FFFFFF;text-decoration:none;font-size:16px;line-height:1" data-size="100" target="_blank">Report Issue/Suggestion </a> <script> (function() { var qs,js,q,s,d=document, gi=d.getElementById, ce=d.createElement, gt=d.getElementsByTagName, id="typef_orm_share", b="https://embed.typeform.com/"; if(!gi.call(d,id)){ js=ce.call(d,"script"); js.id=id; js.src=b+"embed.js"; q=gt.call(d,"script")[0]; q.parentNode.insertBefore(js,q) } })() </script>
+              </div>
             <% unless current_page?(edit_user_registration_path(current_user)) %>
-              <%= link_to  "My Account", edit_user_registration_path(current_user) %>
+              <div class="mt-4">
+                <%= link_to  "My Account", edit_user_registration_path(current_user) %>
+              </div>
             <% end %>
           </div>
-          <div class="col text-end">
+          <div class="col-md text-center text-md-end mt-4 mt-md-0">
             <%= link_to("Logout", destroy_user_session_path, method: :delete) %>
           </div>
         </div>
