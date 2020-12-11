@@ -26,6 +26,8 @@ class GamesController < ApplicationController
 
     def my
         @season = Season.find(params[:season_id])
+        @teams = @season.users
+
         @games = Game.where(season_id: @season.id).where('away_team_id=? OR home_team_id=?', current_user.id, current_user.id)
     end
 

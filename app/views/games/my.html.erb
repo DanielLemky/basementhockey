@@ -17,51 +17,7 @@
             </tr>
         </thead>
         <tbody>
-            <% @games.each do |game| %>
-            <tr>
-                <td class="text-center">
-                    <%= User.find(game.away_team_id).team_name %>
-                    <% if game.result %>
-                        <div class="d-md-none text-center fw-bold<% if game.result and game.result.away_goals > game.result.home_goals %> won<% end %>"><%= game.result.away_goals %></div>
-                    <% end %>
-                </td>
-                <td class="text-end d-none d-md-table-cell fw-bold<% if game.result and game.result.away_goals > game.result.home_goals %> won<% end %>">
-                    <% if game.result %>
-                        <%= game.result.away_goals %>
-                    <% end %>
-                </td>
-                <td class="text-center game-status fw-bold">
-                <% if game.result %>
-                    <% if game.result.shootout == 1 %>
-                        FINAL(SO)
-                    <% elsif game.result.overtime == 1 %>
-                        FINAL(OT)
-                    <% else %>
-                        FINAL
-                    <% end %>
-                <% else %>
-                    <% if current_user.id == game.away_team_id or current_user.id == game.home_team_id %>
-                        <%= link_to 'Record Result', new_game_result_path(game), class: "btn btn-primary record-result" %>
-                    <% else %>
-                        -
-                    <% end %>
-                <% end %>
-                </td>
-                <td class="d-none d-md-table-cell fw-bold<% if game.result and game.result.away_goals < game.result.home_goals %> won<% end %>">
-                    <% if game.result %>
-                        <%= game.result.home_goals %>
-                    <% end %>
-                </td>
-                <td class="text-center">
-                    <%= User.find(game.home_team_id).team_name %>
-                    <% if game.result %>
-                        <div class="d-md-none text-center fw-bold<% if game.result and game.result.away_goals < game.result.home_goals %> won<% end %>">
-                            <%= game.result.home_goals %>
-                        </div>
-                    <% end %>
-                </td>
-            </tr>
-            <% end %>
+            <%= render partial: 'my_game_rows' %>
         </tbody>
     </table>
     </div>

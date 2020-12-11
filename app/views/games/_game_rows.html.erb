@@ -1,0 +1,63 @@
+<% week_number = 1 %>
+    <% @games.each_with_index do |game, index| %>
+        <% if index == 0 %>
+            <tr class="week-counter fw-bold">
+                <td></td>
+                <td></td>
+                <td class="text-center">Week <%= week_number %></td>
+                <td></td>
+                <td></td>
+            </tr>
+        <% elsif week_number == (index / (@season.games_per_week * @teams.size))  %>
+            <tr class="week-counter fw-bold">
+                <td></td>
+                <td></td>
+                <td class="text-center">Week <%= week_number = week_number + 1 %></td>
+                <td></td>
+                <td></td>
+            </tr>
+        <% end %>
+    <tr>
+        <td class="text-center">
+            <%= User.find(game.away_team_id).team_name %>
+            <% if game.result %>
+                <div class="d-md-none text-center fw-bold<% if game.result and game.result.away_goals > game.result.home_goals %> won<% end %>"><%= game.result.away_goals %></div>
+            <% end %>
+        </td>
+        <td class="text-end d-none d-md-table-cell fw-bold<% if game.result and game.result.away_goals > game.result.home_goals %> won<% end %>">
+            <% if game.result %>
+                <%= game.result.away_goals %>
+            <% end %>
+        </td>
+        <td class="text-center game-status fw-bold">
+        <% if game.result %>
+            <% if game.result.shootout == 1 %>
+                FINAL(SO)
+            <% elsif game.result.overtime == 1 %>
+                FINAL(OT)
+            <% else %>
+                FINAL
+            <% end %>
+        <% else %>
+            <% if (current_user.id == game.away_team_id or current_user.id == game.home_team_id) and (@season.start_date.step(Date.today, 7).count >= week_number) %>
+                <%= link_to 'Record Result', new_game_result_path(game), class: "btn btn-primary record-result" %>
+            <% else %>
+                -
+            <% end %>
+        <% end %>
+        </td>
+        <td class="d-none d-md-table-cell fw-bold<% if game.result and game.result.away_goals < game.result.home_goals %> won<% end %>">
+            <% if game.result %>
+                <%= game.result.home_goals %>
+            <% end %>
+        </td>
+        <td class="text-center">
+            <%= User.find(game.home_team_id).team_name %>
+            <% if game.result %>
+                <div class="d-md-none text-center fw-bold<% if game.result and game.result.away_goals < game.result.home_goals %> won<% end %>">
+                    <%= game.result.home_goals %>
+                </div>
+            <% end %>
+        </td>
+    </tr>
+<% end %>

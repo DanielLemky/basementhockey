@@ -91,8 +91,8 @@ h1 {
         padding: 0;
     }
     .middle {
-        padding-top: 30px;
-        padding-bottom: 30px;
+        padding-top: 50px;
+        padding-bottom: 50px;
     }
     .team {
         // margin: 0 auto;
@@ -147,22 +147,6 @@ h1 {
     background-color: #4f46e5;
 }
 
-@media only screen and (max-width: 600px) {
-    #next-game {
-        .middle {
-            background-color: #000;
-            color: #fff;
-            border-bottom: 2px solid #4f46e5;
-            border-top: 2px solid #4f46e5;
-            padding:10px;
-        }
-    }
-    #next-game-button {
-        margin-top: 0;
-        margin-bottom: 30px;
-    }
-}
-
 #logo {
     font-weight: bold;
     font-family: 'Sintony', sans-serif;
@@ -176,5 +160,35 @@ h1 {
     margin-bottom: 50px;
     a {
     text-decoration: none;
+    }
+}
+
+.next-game-status {
+    p {
+        color: #000;
+        margin-bottom: 0;
+        font-size: 18px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    #next-game {
+        .middle {
+            padding:20px;
+            border-top: 1px solid #F8F9FC;
+            border-bottom: 1px solid #F8F9FC;
+            background-color: #212529;
+            p {
+                color: #fff;
+            }
+        }
+        .team {
+            border-radius: 5px;
+            overflow: hidden;
+        }
+    }
+    #next-game-button {
+        margin-top: 0;
+        margin-bottom: 30px;
     }
 }
