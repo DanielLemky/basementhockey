@@ -155,14 +155,6 @@ h1 {
     margin-left: 30px;
 }
 
-#footer-links {
-    margin-top: 100px;
-    margin-bottom: 50px;
-    a {
-    text-decoration: none;
-    }
-}
-
 .next-game-status {
     p {
         color: #000;
@@ -191,4 +183,41 @@ h1 {
         margin-top: 0;
         margin-bottom: 30px;
     }
+}
+
+.btn-other {
+    background-color: #74b772;
+    color: #fff;
+    &:hover {
+        color: #fff;
+    }
+}
+
+footer {
+    background-color: #212529;
+    width: 100%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    a {
+        color: #fff;
+        text-decoration: none;
+        &:hover {
+            color: #4f46e5;
+        }
+    }
+}
+
+html, body {
+    height: 100%;
+}
+body {
+display: flex;
+flex-direction: column;
+}
+#ui {
+flex: 1 0 auto;
+}
+footer {
+flex-shrink: 0;
+margin-top: 50px;
 }

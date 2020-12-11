@@ -12,6 +12,7 @@
   </head>
 
   <body>
+    <div id="ui">
     <nav class="navbar navbar-dark bg-dark">
       <div class="container-fluid">
         <%= link_to root_path, class: "navbar-brand" do %>
@@ -32,20 +33,27 @@
     <% end %>
     
     <%= yield %>
-    <% if user_signed_in? %>
+    </div>
+    <footer>
+      <% if user_signed_in? %>
       <div id="footer-links" class="container">
         <div class="row">
           <div class="col">
             <% unless current_page?(root_path) %>
-                <%= link_to "< Back to Dashboard", root_path, id: "back-to-dashboard" %>
+                <%= link_to  "Return to Dashboard", root_path, id: "back-to-dashboard" %>
+            <% end %>
+          </div>
+          <div class="col text-center">
+            <% unless current_page?(edit_user_registration_path(current_user)) %>
+              <%= link_to  "My Account", edit_user_registration_path(current_user) %>
             <% end %>
           </div>
           <div class="col text-end">
             <%= link_to("Logout", destroy_user_session_path, method: :delete) %>
           </div>
         </div>
-      </div>
-    <% end %>
-    </div>
+        </div>
+      <% end %>
+    </footer>
   </body>
 </html>

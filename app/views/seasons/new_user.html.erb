@@ -7,5 +7,6 @@
             <%= form.select(:user, options_from_collection_for_select(@users, :id, :email), {}, { class: "form-select" }) %>
         </div>
         <%= form.submit "Add User", class: "btn btn-primary" %>
+        <%= link_to "Back", :back, class: "btn btn-secondary" %>
     <% end %>
 </div>
