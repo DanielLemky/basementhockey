@@ -18,6 +18,7 @@ class ResultsController < ApplicationController
         update_stats
         
         if @result.save
+            flash.alert = 'Success! Your results have been saved.'
             redirect_to season_games_path(@game.season_id)
         else
             redirect_to new_game_result_path(game)

@@ -1,7 +1,11 @@
-<div class="container">
-    <h1>Add User to <%= @season.name %> Season</h1>
+<div class="container reduced-width">
+    <div class="text-center">
+        <h1>Add User to <%= @season.name %> Season</h1>
+    </div>
     <%= form_with(url: "/seasons/#{@season.id}/add_user", method: :post) do |form| %>
-        <%= form.select(:user, options_from_collection_for_select(@users, :id, :email), {}, { class: "form-select" }) %>
+        <div class="mb-3">
+            <%= form.select(:user, options_from_collection_for_select(@users, :id, :email), {}, { class: "form-select" }) %>
+        </div>
         <%= form.submit "Add User", class: "btn btn-primary" %>
     <% end %>
 </div>

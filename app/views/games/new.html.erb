@@ -1,19 +1,22 @@
-<div class="container">
-    <h1>New Game</h1>
+<div class="container reduced-width">
+    <div class="text-center">
+        <h1>New Game</h1>
+    </div>
     <%= form_with(url: season_games_path, method: :post) do |form| %>
         <div class="row">
-            <div class="col">
-                 <%= form.label "Away Team" %>
+            <div class="col mb-3">
+                 <%= form.label "Away Team", class: "form-label" %>
                  <%= form.select(:away_team_id, options_from_collection_for_select(@teams, :id, :team_name), {}, { class: "form-select" }) %>
             </div>
-            <div class="col">
-                 <%= form.label "Home Team" %>
+            <div class="col mb-3">
+                 <%= form.label "Home Team", class: "form-label" %>
                  <%= form.select(:home_team_id, options_from_collection_for_select(@teams, :id, :team_name), {}, { class: "form-select" }) %>
             </div>
         </div>
         <div class="row">
             <div class="col">
-                <%= form.submit "Create Game", class: "btn btn-primary" %>
+                <%= form.submit "Create Game and New", class: "btn btn-primary" %>
+                <%= form.submit "Create Game", class: "btn btn-secondary" %>
         </div>
     <% end %>
 </div>

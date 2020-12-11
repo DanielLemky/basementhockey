@@ -3,7 +3,7 @@
     <% if @seasons.any? %>
 
         <% @seasons.each do |season| %>
-            <h2><%= season.name %> Season</h2>
+            <h1><%= season.name %> Season</h1>
             <div class="row">
                 <%= render partial: 'next_game', locals: { season: season } %>
                 <%= render partial: 'current_week', locals: { season: season } %>
@@ -44,7 +44,7 @@
                             </tbody>
                         </table>
                         <div>
-                            <%= link_to "Create New Season", new_season_path %>
+                            <%= link_to "Create New Season", new_season_path, class: "btn btn-primary" %>
                         </div>
                     </div>
                 </div>

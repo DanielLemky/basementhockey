@@ -36,8 +36,14 @@ class GamesController < ApplicationController
 
         unless @game.home_team_id == @game.away_team_id
             if @game.save
-                redirect_to season_games_path(@game.season_id)
+                flash.alert = "Success! Game was created."
+                if params[:commit] == 'Create Game and New'
+                    redirect_to new_season_game_path(@game.season_id)    
+                else
+                    redirect_to season_path(@game.season_id)
+                end
             else
+                flash.alert = "Error: Unknown"
                 redirect_to new_game_path
             end
         else

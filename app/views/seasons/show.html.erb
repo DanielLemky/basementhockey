@@ -1,5 +1,6 @@
 <div class="container">
-    <h1><%= @season.name %></h1>
+    <h1>Season Admin</h1>
+    <h2><%= @season.name %> Season</h2>
     <div class="row">
         <div class="col-md-6">
             <div class="card">
@@ -7,14 +8,41 @@
                     <h3 class="card-title">Settings</h3>
                     <div class="row">
                         <div class="col">
-                            <p>Start Date: <%= @season.start_date %></p>
-                            <p>Type: <%= @season.season_type %></p>
-                            <p>Games Per Week: <%= @season.games_per_week %></p>
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <th>Type</th>
+                                        <td><%= @season.season_type.capitalize %></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Start Date</th>
+                                        <td><%= @season.start_date.strftime("%B %-d, %Y") %></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Games Per Week</th>
+                                        <td><%= @season.games_per_week %></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Games Created</th>
+                                        <td><%= @season.games.size %></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Games Played</th>
+                                        <td><%= @season.results.size %></td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                     <% if current_user.email == 'daniel@lemky.ca' %>
                         <div class="admin text-center">
-                            <%= link_to "Add Games to Season", new_season_game_path(@season) %>
+                            <% if @season.users.size > 1 %>
+                                <%= link_to "Add Games to Season", new_season_game_path(@season), class: "btn btn-primary" %>
+                            <% else %>
+                                <div class="alert alert-primary">
+                                    <span>Add at least two users to add games to this season</span>
+                                </div>
+                            <% end %>
                         </div>
                     <% end %>
                 </div>
@@ -25,22 +53,19 @@
                 <div class="card-body">
                     <h3 class="card-title">Users</h3>
                     <table class="table">
-                        <thead>
-                            <th>Name</th>
-                            <th>Email</th>
-                        </thead>
                         <tbody>
                             <% @season.users.each do |user| %>
                                 <tr>
                                     <td><%= user.first_name %> <%= user.last_name %></td>
                                     <td><%= user.email %></td>
+                                    <td><%= user.team_name %></td>
                                 </tr>
                             <% end %>
                         </tbody>
                     </table>
                     <% if current_user.email == 'daniel@lemky.ca' %>
                         <div class="admin text-center">
-                            <%= link_to "Add Users to Season", season_new_user_path(@season) %>
+                            <%= link_to "Add Users to Season", season_new_user_path(@season), class: "btn btn-primary" %>
                         </div>
                     <% end %>
                 </div>
