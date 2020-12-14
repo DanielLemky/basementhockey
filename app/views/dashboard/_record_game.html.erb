@@ -5,8 +5,20 @@ game_number = @my_games.find_index(@next_game)
 <% if game_number %>
     <% if (game_number / season.games_per_week) <= (season.start_date.step(Date.today, 7).count) %>
         <div class="next-game-status">
-            <p class="text-uppercase fw-bold mb-2">Ready to Play</p>
-            <%= link_to 'Record Result', new_game_result_path(@next_game), class: "btn btn-primary" %>
+            <% unless @next_game.game_time %>
+                <div class="alert alert-success">
+                    <span>Ready to Schedule</span>
+                </div>
+                <%= link_to 'Schedule Game', new_game_game_time_path(@next_game), class: "btn btn-primary" %>
+            <% else %>
+                <p class="text-uppercase fw-bold mb-3">
+                    <%= @next_game.game_time.date_time.in_time_zone(current_user.time_zone).strftime("%a, %b %-d, %l:%M %P") %> 
+                    <%= link_to edit_game_game_time_path(@next_game) do %>
+                        <i class="fas fa-edit"></i>
+                    <% end %>
+                </p>
+                <%= link_to 'Record Result', new_game_result_path(@next_game), class: "btn btn-primary" %>
+            <% end %>
         </div>
     <% else %>
         <div class="next-game-status">

@@ -1,0 +1,2 @@
+module GameTimesHelper
+end

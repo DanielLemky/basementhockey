@@ -4,6 +4,6 @@ class ApplicationController < ActionController::Base
     protected
 
         def configure_permitted_parameters
-            devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :team_name])
+            devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :team_name, :time_zone])
         end
 end

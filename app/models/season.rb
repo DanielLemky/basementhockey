@@ -4,6 +4,7 @@ class Season < ApplicationRecord
     has_many :games
     has_many :results, through: :games
     has_many :team_stats
+    has_many :game_times, through: :games
 
     enum season_type: [:season, :tournament]
     after_initialize :set_default_season_type, :if => :new_record?

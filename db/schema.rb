@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_11_060804) do
+ActiveRecord::Schema.define(version: 2020_12_14_050612) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,15 @@ ActiveRecord::Schema.define(version: 2020_12_11_060804) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "game_times", force: :cascade do |t|
+    t.bigint "game_id"
+    t.datetime "date_time"
+    t.integer "set_by_user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["game_id"], name: "index_game_times_on_game_id"
   end
 
   create_table "games", force: :cascade do |t|
@@ -105,6 +114,7 @@ ActiveRecord::Schema.define(version: 2020_12_11_060804) do
     t.string "team_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "time_zone"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

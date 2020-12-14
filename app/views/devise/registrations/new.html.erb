@@ -23,6 +23,11 @@
   </div>
 
   <div class="mb-3">
+    <%= f.label :time_zone, class: "form-label" %>
+    <%= f.time_zone_select :time_zone, nil, {}, { class: "form-select" } %>
+  </div>
+
+  <div class="mb-3">
     <%= f.label :email, class: "form-label" %>
     <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", required: true %>
   </div>

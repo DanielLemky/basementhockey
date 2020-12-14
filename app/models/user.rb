@@ -9,4 +9,5 @@ class User < ApplicationRecord
   has_many :games
   has_many :results, through: :games
   has_many :team_stats
+  has_many :game_times, through: :games
 end

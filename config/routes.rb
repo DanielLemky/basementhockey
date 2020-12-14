@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 
   resources :games, except: [:new, :index, :create] do
     resource :result
+    resource :game_time
   end
 
 end

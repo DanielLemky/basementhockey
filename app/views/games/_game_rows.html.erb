@@ -41,10 +41,21 @@
                 <% end %>
             <% end %>
         <% else %>
-            <% if (current_user.id == game.away_team_id or current_user.id == game.home_team_id) and (@season.start_date.step(Date.today, 7).count >= week_number) %>
-                <%= link_to 'Record Result', new_game_result_path(game), class: "btn btn-primary record-result" %>
+            <% if game.game_time %>
+                <p><%= game.game_time.date_time.in_time_zone(current_user.time_zone).strftime("%a, %b %-d, %I:%M %P") %>
+                    <% if (current_user.id == game.away_team_id or current_user.id == game.home_team_id) and (@season.start_date.step(Date.today, 7).count >= week_number) %>
+                        <%= link_to edit_game_game_time_path(game) do %>
+                            <i class="fas fa-edit"></i>
+                        <% end %>
+                    <% end %>
+                </p>
+                <% if (current_user.id == game.away_team_id or current_user.id == game.home_team_id) and (@season.start_date.step(Date.today, 7).count >= week_number) %>
+                    <%= link_to 'Record Result', new_game_result_path(game), class: "btn btn-other record-result" %>
+                <% end %>
             <% else %>
-                -
+                <% if (current_user.id == game.away_team_id or current_user.id == game.home_team_id) and (@season.start_date.step(Date.today, 7).count >= week_number) %>
+                    <%= link_to 'Schedule Game', new_game_game_time_path(game), class: "btn btn-primary record-result" %>
+                <% end %>
             <% end %>
         <% end %>
         </td>

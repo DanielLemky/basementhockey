@@ -20,6 +20,14 @@ h1 {
     margin-bottom: 30px;
 }
 
+.purple {
+    color: #4f46e5;
+}
+
+.btn-link {
+    display: block;
+}
+
 .table {
     td {
         height: 50px;
@@ -28,6 +36,8 @@ h1 {
     &.games {
         td {    
             height: 80px;
+            padding-top: 30px;
+            padding-bottom: 30px;
         }
         .won {
             color: #4f46e5;
