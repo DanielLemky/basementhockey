@@ -39,8 +39,15 @@ h1 {
             padding-top: 30px;
             padding-bottom: 30px;
         }
+        span {
+            padding: 5px 10px;
+            border-radius: 50%;
+        }
         .won {
-            color: #ffcb00;
+            span {
+                color: #4f46e5;
+                background-color: #eee;
+            }
         }
         .week-counter {
             color: #4f46e5;
@@ -171,6 +178,13 @@ h1 {
         margin-bottom: 0;
         font-size: 18px;
     }
+}
+
+.edit-icon {
+    font-size: 12px;
+    margin-left: 5px;
+    margin-top: 4.5px;
+    vertical-align: top;
 }
 
 @media only screen and (max-width: 600px) {

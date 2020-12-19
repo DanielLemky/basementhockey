@@ -3,9 +3,9 @@
     <% @games = Game.where(week: week_number) %>
     <tr class="week-counter fw-bold">
         <td></td>
-        <td></td>
+        <td class="d-none d-md-table-cell"></td>
         <td class="text-center">Week <%= week_number %></td>
-        <td></td>
+        <td class="d-none d-md-table-cell"></td>
         <td></td>
     </tr>
     <% @games.each do |game| %>
@@ -18,7 +18,7 @@
             </td>
             <td class="text-end d-none d-md-table-cell fw-bold<% if game.result and game.result.away_goals > game.result.home_goals %> won<% end %>">
                 <% if game.result %>
-                    <%= game.result.away_goals %>
+                    <span><%= game.result.away_goals %></span>
                 <% end %>
             </td>
             <td class="text-center game-status fw-bold">
@@ -59,7 +59,7 @@
             </td>
             <td class="d-none d-md-table-cell fw-bold<% if game.result and game.result.away_goals < game.result.home_goals %> won<% end %>">
                 <% if game.result %>
-                    <%= game.result.home_goals %>
+                    <span><%= game.result.home_goals %></span>
                 <% end %>
             </td>
             <td class="text-center">
