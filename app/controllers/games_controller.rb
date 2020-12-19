@@ -15,10 +15,10 @@ class GamesController < ApplicationController
 
     def index
         @season = Season.find(params[:season_id])
-        @teams = @season.users
 
         if current_user.seasons.exists?(@season.id)
             @games = Game.where(season_id: @season.id)
+            @current_week = @season.start_date.step(Date.today, 7).count
         else
             redirect_to root_path
         end
@@ -26,9 +26,12 @@ class GamesController < ApplicationController
 
     def my
         @season = Season.find(params[:season_id])
-        @teams = @season.users
-
-        @games = Game.where(season_id: @season.id).where('away_team_id=? OR home_team_id=?', current_user.id, current_user.id)
+        if current_user.seasons.exists?(@season.id)
+            @games = Game.where(season_id: @season.id).where('away_team_id=? OR home_team_id=?', current_user.id, current_user.id)
+            @current_week = @season.start_date.step(Date.today, 7).count
+        else
+            redirect_to root_path
+        end
     end
 
     def create
@@ -61,6 +64,6 @@ class GamesController < ApplicationController
 
     private
         def game_params
-            params.permit(:home_team_id, :away_team_id, :status, :season_id)
+            params.permit(:home_team_id, :away_team_id, :status, :season_id, :week)
         end
 end
