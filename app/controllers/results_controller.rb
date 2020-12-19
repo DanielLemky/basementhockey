@@ -19,7 +19,7 @@ class ResultsController < ApplicationController
         @game = Game.find(params[:game_id])
         @result = @game.build_result(result_params)
         update_stats
-        
+
         if @result.save
             flash.alert = 'Success! Your results have been saved.'
             redirect_to season_games_path(@game.season_id)

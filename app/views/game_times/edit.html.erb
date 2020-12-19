@@ -3,6 +3,7 @@
         <h1>Edit Game Time</h1>
         <h2><%= User.find(@game.away_team_id).team_name %> vs <%= User.find(@game.home_team_id).team_name %></h2>
         <p>Enter the agreed upon time with your opponent.<p>
+        <h4>Game can be scheduled for <%= @earliest_date.strftime("%b %-d, %Y") %> or later</h4>
     </div>
     <div class="mb-3">
         <%= form_with url: game_game_time_path(@game), method: :put do |form| %>

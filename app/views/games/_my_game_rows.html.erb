@@ -41,8 +41,12 @@
                             <% end %>
                         <% end %>
                     </p>
-                    <% if (current_user.id == game.away_team_id or current_user.id == game.home_team_id) and (@current_week >= week_number) %>
-                        <%= link_to 'Record Result', new_game_result_path(game), class: "btn btn-other record-result" %>
+                    <% if (current_user.id == game.away_team_id or current_user.id == game.home_team_id) %>
+                        <% Time.use_zone(current_user.time_zone) do %>
+                            <% if Time.current > game.game_time.date_time %>
+                                <%= link_to 'Record Result', new_game_result_path(game), class: "btn btn-other record-result" %>
+                            <% end %>
+                        <% end %>
                     <% end %>
                 <% else %>
                     <% if (current_user.id == game.away_team_id or current_user.id == game.home_team_id) %>
