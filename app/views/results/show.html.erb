@@ -2,9 +2,9 @@
     <div class="text-center">
         <h1><%= User.find(@game.away_team_id).team_name %> <%= @game.result.away_goals %> - <%= @game.result.home_goals %> <%= User.find(@game.home_team_id).team_name %></h1>
         <p>
-            <% if @game.result.shootout %>
+            <% if @game.result.shootout == 1 %>
                 Final (Shootout)
-            <% elsif @game.result.overtime %>
+            <% elsif @game.result.overtime == 1 %>
                 Final (Overtime)
             <% else %>
                 Final
