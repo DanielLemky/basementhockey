@@ -14,6 +14,12 @@
             </div>
         </div>
         <div class="row">
+            <div class="col mb-3">
+                 <%= form.label :week, class: "form-label" %>
+                 <%= form.text_field :week, class: "form-control" %>
+            </div>
+        </div>
+        <div class="row">
             <div class="col">
                 <%= form.submit "Create Game and New", class: "btn btn-primary" %>
                 <%= form.submit "Create Game", class: "btn btn-other" %>

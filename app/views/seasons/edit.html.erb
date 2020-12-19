@@ -1,0 +1,49 @@
+<div class="container reduced-width">
+  <div class="text-center mb-3">
+    <h2>Edit Season</h1>
+  </div>
+
+
+  <%= form_with model: @season do |form| %>
+
+    <div class="mb-3">
+      <%= form.label :name, class: "form-label" %>
+      <%= form.text_field :name, class: "form-control" %>
+    </div>
+
+    <div class="">
+      <span>Season Type</span>
+    </div>
+
+    <div class="form-check">
+      <%= form.radio_button :season_type, :season, class: "form-check-input" %>
+      <%= form.label :season_type_season, "Season", class: "form-check-label" %>
+    </div>
+
+    <div class="mb-3 form-check">
+      <%= form.radio_button :season_type, :tournament, class: "form-check-input" %>
+      <%= form.label :season_type_tournament, "Tournament", class: "form-check-label" %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :start_date, class: "form-label" %>
+      <%= form.date_field :start_date, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :games_per_week, class: "form-label" %>
+      <%= form.text_field :games_per_week, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :length_in_weeks, class: "form-label" %>
+      <%= form.text_field :length_in_weeks, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.submit "Update Season", class: "btn btn-primary" %>
+      <%= link_to "Back", :back, class: "btn btn-secondary" %>
+    </div>
+  <% end %>
+
+</div>

@@ -36,6 +36,11 @@
     </div>
 
     <div class="mb-3">
+      <%= form.label :length_in_weeks, class: "form-label" %>
+      <%= form.text_field :length_in_weeks, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
       <%= form.submit "Create Season", class: "btn btn-primary" %>
       <%= link_to "Back", :back, class: "btn btn-secondary" %>
     </div>

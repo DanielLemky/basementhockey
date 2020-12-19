@@ -13,6 +13,7 @@ class SeasonsController < ApplicationController
     end
 
     def edit
+        @season = Season.find(params[:id])
     end
 
     def standings
@@ -50,6 +51,15 @@ class SeasonsController < ApplicationController
     end
 
     def update
+        @season = Season.find(params[:id])
+
+        if @season.update(season_params)
+            flash.alert = 'Success! Season has been updated.'
+            redirect_to @season
+        else
+            flash.alert = 'Error: An error occurred while updating your season.'
+            redirect_to new_season_path
+        end
     end
 
     def destroy
@@ -57,6 +67,6 @@ class SeasonsController < ApplicationController
 
     private
         def season_params
-            params.require(:season).permit(:name, :season_type, :start_date, :games_per_week)
+            params.require(:season).permit(:name, :season_type, :start_date, :games_per_week, :length_in_weeks)
         end
 end
