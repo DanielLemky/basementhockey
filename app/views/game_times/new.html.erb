@@ -12,9 +12,12 @@
             <span class="form-text">Timezone: <%= current_user.time_zone %></span>
             <%= form.datetime_local_field :date_time, class: "form-control" %>
             <span class="form-text">Click calendar icon to open calendar picker</span><br>
-            <span class="form-text"><%= current_user.time_zone %> not your timezone? Update in <%= link_to "My Account", edit_user_registration_path(current_user) %></span>
+            <span class="form-text"><%= current_user.time_zone %> not your timezone? Update in <%= link_to "My Account", edit_user_registration_path %></span>
         </div>
-        <%= form.submit "Set Game Time", class: "btn btn-primary" %>
+        <div>
+            <%= form.submit "Set Game Time", class: "btn btn-primary" %>
+            <%= link_to "Back", :back, class: "btn btn-secondary" %>
+        </div>
     <% end %>
     </div>
 </div>

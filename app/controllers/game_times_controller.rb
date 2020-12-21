@@ -3,7 +3,7 @@ class GameTimesController < ApplicationController
 
     def new
         @game = Game.find(params[:game_id])
-        @earliest_date = @game.season.start_date + (@game.week).weeks
+        @earliest_date = @game.season.start_date + (@game.week - 1).weeks
 
         if current_user.id == @game.home_team_id  or  current_user.id == @game.away_team_id
             @game_time = @game.build_game_time
