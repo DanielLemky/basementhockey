@@ -107,9 +107,16 @@ h1 {
     .card-body {
         padding: 0;
     }
+    .card-title {
+        color: #fff;
+    }
     .middle {
         padding-top: 50px;
         padding-bottom: 50px;
+    }
+    .row {
+        background-position: center !important;
+        background-size: cover !important;
     }
     .team {
         // margin: 0 auto;
@@ -119,17 +126,16 @@ h1 {
         justify-content: center;
         align-items: center;
         // border-radius: 15px;
-        background-position: center;
-        background-size: cover;
         // margin-top: 30px;
         // margin-bottom: 30px;
     }
     .team-name {
-        color: #fff;
-        font-size: 32px;
+        font-family: 'Sintony', sans-serif;
+        color: #ffcb00;
+        font-size: 36px;
+        letter-spacing: 2px;
         font-weight: bold;
         text-transform: uppercase;
-        font-style: italic;
     }
     .vs {
         text-transform: uppercase;
@@ -150,6 +156,16 @@ h1 {
         padding: 30px;
         p {
             margin-bottom: 0;
+        }
+    }
+    .next-game-status p {
+        color: #ffcb00;
+        i {
+            margin-left: 10px;
+            color: #ffcb00;
+            font-size: 12px;
+            vertical-align: top;
+            margin-top:7px;
         }
     }
 }
@@ -191,16 +207,22 @@ h1 {
     #next-game {
         .middle {
             padding:20px;
-            border-top: 1px solid #F8F9FC;
-            border-bottom: 1px solid #F8F9FC;
-            background-color: #212529;
             p {
                 color: #fff;
+                margin-bottom: 0;
             }
         }
         .team {
             border-radius: 5px;
             overflow: hidden;
+            &:last-of-type {
+                padding-bottom: 50px;
+            }
+        }
+        .next-game-status {
+            p {
+                color: #fff;
+            }
         }
     }
     #next-game-button {
