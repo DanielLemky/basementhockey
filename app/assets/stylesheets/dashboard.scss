@@ -99,6 +99,9 @@ h1 {
 .game-status {
     font-size: 14px;
     color: #444;
+    p {
+        margin-bottom: 0;
+    }
 }
 
 #next-game {
