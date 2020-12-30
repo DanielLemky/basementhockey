@@ -8,28 +8,28 @@
                 <thead>
                     <th scope="col">#</th>
                     <th scope="col">Team</th>
-                    <th scope="col">W</th>
-                    <th scope="col">L</th>
-                    <th scope="col">OTL</th>
-                    <th scope="col">PTS</th>
-                    <th scope="col">GP</th>
-                    <th scope="col">GF</th>
-                    <th scope="col">GA</th>
-                    <th scope="col">GD</th>
+                    <th class="text-center" scope="col">GP</th>
+                    <th class="text-center" scope="col">W</th>
+                    <th class="text-center" scope="col">L</th>
+                    <th class="text-center" scope="col">OTL</th>
+                    <th class="text-center" scope="col">PTS</th>
+                    <th class="text-center" scope="col">GF</th>
+                    <th class="text-center" scope="col">GA</th>
+                    <th class="text-center" scope="col">GD</th>
                 </thead>
                 <tbody>
                     <% @team_stats.each_with_index do |team, index| %>
                         <tr>
                             <td><%= index + 1 %></td>
                             <td><%= team.user.team_name %></td>
-                            <td><%= team.wins %></td>
-                            <td><%= team.losses %></td>
-                            <td><%= team.overtime_losses %></td>
-                            <td class="fw-bold"><%= team.points %></td>
-                            <td><%= team.wins + team.losses + team.overtime_losses %></td>
-                            <td><%= team.goals_for %></td>
-                            <td><%= team.goals_against %></td>
-                            <td><%= team.goals_for - team.goals_against %></td>
+                            <td class="text-center"><%= team.wins + team.losses + team.overtime_losses %></td>
+                            <td class="text-center"><%= team.wins %></td>
+                            <td class="text-center"><%= team.losses %></td>
+                            <td class="text-center"><%= team.overtime_losses %></td>
+                            <td class="fw-bold purple text-center"><%= team.points %></td>
+                            <td class="text-center"><%= team.goals_for %></td>
+                            <td class="text-center"><%= team.goals_against %></td>
+                            <td class="fw-bold text-center"><%= team.goals_for - team.goals_against %></td>
                         </tr>
                     <% end %>
                 </tbody>
