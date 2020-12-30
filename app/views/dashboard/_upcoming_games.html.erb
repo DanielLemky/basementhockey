@@ -4,7 +4,7 @@
             <h3 class="card-title">Other Upcoming Games</h3>
             <table class="table">
                 <tbody>
-                    <% season.games.limit(5).where.not('away_team_id=? OR home_team_id=?', current_user.id, current_user.id).each do |game| %>
+                    <% season.games.includes(:result, :game_time).where(results: { id: nil}).where.not('away_team_id=? OR home_team_id=?', current_user.id, current_user.id).order(:date_time, :id).limit(5).each do |game| %>
                         <tr>
                             <td><%= User.find(game.away_team_id).team_name %></td>
                             <td class="text-center">vs</td>
