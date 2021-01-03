@@ -9,13 +9,15 @@
                     <th scope="col">#</th>
                     <th scope="col">Team</th>
                     <th class="text-center" scope="col">GP</th>
+                    <th class="text-center" scope="col">PTS</th>
+                    <th class="text-center" scope="col">GD</th>
                     <th class="text-center" scope="col">W</th>
                     <th class="text-center" scope="col">L</th>
                     <th class="text-center" scope="col">OTL</th>
-                    <th class="text-center" scope="col">PTS</th>
                     <th class="text-center" scope="col">GF</th>
+                    <th class="text-center" scope="col">GFA</th>
                     <th class="text-center" scope="col">GA</th>
-                    <th class="text-center" scope="col">GD</th>
+                    <th class="text-center" scope="col">GAA</th>
                 </thead>
                 <tbody>
                     <% @team_stats.each_with_index do |team, index| %>
@@ -23,13 +25,27 @@
                             <td><%= index + 1 %></td>
                             <td><%= team.user.team_name %></td>
                             <td class="text-center"><%= team.wins + team.losses + team.overtime_losses %></td>
+                            <td class="fw-bold purple text-center"><%= team.points %></td>
+                            <td class="fw-bold text-center"><%= team.goals_for - team.goals_against %></td>
                             <td class="text-center"><%= team.wins %></td>
                             <td class="text-center"><%= team.losses %></td>
                             <td class="text-center"><%= team.overtime_losses %></td>
-                            <td class="fw-bold purple text-center"><%= team.points %></td>
                             <td class="text-center"><%= team.goals_for %></td>
+                            <td class="text-center">
+                                <% if (team.wins + team.losses + team.overtime_losses) > 0 %>
+                                    <%= team.goals_for.to_f / (team.wins + team.losses + team.overtime_losses) %>
+                                <% else %>
+                                    0
+                                <% end %>
+                            </td>
                             <td class="text-center"><%= team.goals_against %></td>
-                            <td class="fw-bold text-center"><%= team.goals_for - team.goals_against %></td>
+                            <td class="text-center">
+                                <% if (team.wins + team.losses + team.overtime_losses) > 0 %>
+                                    <%= team.goals_against.to_f / (team.wins + team.losses + team.overtime_losses) %>
+                                <% else %>
+                                    0
+                                <% end %>
+                            </td>
                         </tr>
                     <% end %>
                 </tbody>
