@@ -279,3 +279,9 @@ margin-top: 50px;
 .card.standings, .card.overflow-scroll {
     overflow: scroll;
 }
+
+#latest-results {
+    .score {
+        white-space: nowrap;
+    }
+}

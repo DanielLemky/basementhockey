@@ -13,7 +13,7 @@
                         <% season.results.limit(5).order(id: :desc).each do |result| %>
                         <tr>
                             <td><%= User.find(result.game.away_team_id).team_name %></td>
-                            <td class="text-center fw-bold">
+                            <td class="text-center fw-bold score">
                                 <%= result.away_goals %> - <%= result.home_goals %>
                             </td>
                             <td class="text-end"><%= User.find(result.game.home_team_id).team_name %></td>
