@@ -41,7 +41,7 @@
                             <td class="text-center"><%= team.goals_against %></td>
                             <td class="text-center">
                                 <% if (team.wins + team.losses + team.overtime_losses) > 0 %>
-                                    <%= number_with_precision(team.goals_against / (team.wins + team.losses + team.overtime_losses), precision: 1) %>
+                                    <%= number_with_precision(team.goals_against.to_f / (team.wins + team.losses + team.overtime_losses), precision: 1) %>
                                 <% else %>
                                     0
                                 <% end %>
