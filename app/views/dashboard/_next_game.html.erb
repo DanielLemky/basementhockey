@@ -9,7 +9,7 @@ game_number = @my_games.find_index(@next_game)
     <div id="next-game" class="card">
         <div class="card-body">
             <% unless @next_game.nil? %>
-                <div class="row" style="background:linear-gradient( rgba(0,0,0,.7), rgba(0,0,0,.7) ),url(<%= asset_path '99.jpg' %>)">
+                <div class="row">
                     <% if @next_game.game_time %>
                         <div class="d-md-none mt-5 mb-2 next-game-status text-center">
                             <p class="text-uppercase fw-bold">
