@@ -22,7 +22,7 @@
                     </tbody>
                 </table>
                 <div class="text-center">
-                    <%= link_to 'View All Games', season_games_path(season), class: "btn btn-primary" %>
+                    <%= link_to 'View All Games', season_games_path(season,anchor: "week#{(season.start_date.step(Date.today, 7).count) + 1}"), class: "btn btn-primary" %>
                 </div>
             <% else %>
                 <div class="alert alert-primary">

@@ -1,7 +1,7 @@
 <% @season.length_in_weeks.times do |week_index| %>
     <% week_number = week_index + 1%>
     <% @games = Game.where(week: week_number).where('away_team_id=? OR home_team_id=?', current_user.id, current_user.id) %>
-    <tr class="week-counter fw-bold">
+    <tr id="week<%= week_number %>" class="week-counter fw-bold">
         <td></td>
         <td class="d-none d-md-table-cell"></td>
         <td class="text-center">Week <%= week_number %></td>
