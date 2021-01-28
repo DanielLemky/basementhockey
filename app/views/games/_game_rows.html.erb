@@ -10,8 +10,12 @@
     </tr>
     <% @games.each do |game| %>
         <tr>
-            <td class="text-center">
-                <%= User.find(game.away_team_id).team_name %>
+            <td class="text-center team-name">
+                <% if User.find(game.away_team_id).twitch %>
+                    <%= link_to User.find(game.away_team_id).team_name, "https://twitch.tv/#{User.find(game.away_team_id).twitch}", target: "_blank" %>
+                <% else %>
+                    <%= User.find(game.away_team_id).team_name %>
+                <% end %>
                 <% if game.result %>
                     <div class="d-md-none text-center fw-bold<% if game.result and game.result.away_goals > game.result.home_goals %> won<% end %>"><%= game.result.away_goals %></div>
                 <% end %>
@@ -65,8 +69,12 @@
                     <span><%= game.result.home_goals %></span>
                 <% end %>
             </td>
-            <td class="text-center">
-                <%= User.find(game.home_team_id).team_name %>
+            <td class="text-center team-name">
+                <% if User.find(game.away_team_id).twitch %>
+                    <%= link_to User.find(game.home_team_id).team_name, "https://twitch.tv/#{User.find(game.home_team_id).twitch}", target: "_blank" %>
+                <% else %>
+                    <%= User.find(game.home_team_id).team_name %>
+                <% end %>
                 <% if game.result %>
                     <div class="d-md-none text-center fw-bold<% if game.result and game.result.away_goals < game.result.home_goals %> won<% end %>">
                         <%= game.result.home_goals %>
