@@ -12,38 +12,30 @@
         <tr>
             <td class="text-center">
                 <%= User.find(game.away_team_id).team_name %>
-                <% if game.result %>
-                    <div class="d-md-none text-center fw-bold<% if game.result and game.result.away_goals > game.result.home_goals %> won<% end %>"><%= game.result.away_goals %></div>
-                <% end %>
-            </td>
-            <td class="text-end d-none d-md-table-cell fw-bold<% if game.result and game.result.away_goals > game.result.home_goals %> won<% end %>">
-                <% if game.result %>
-                    <span><%= game.result.away_goals %></span>
-                <% end %>
             </td>
             <td class="text-center game-status fw-bold">
             <% if game.result %>
-                <%= link_to game_result_path(game.id) do %>
-                    <% if game.result.shootout == 1 %>
-                        FINAL(SO)
-                    <% elsif game.result.overtime == 1 %>
-                        FINAL(OT)
-                    <% else %>
-                        FINAL
-                    <% end %>
+                <span class="game-score"><%= game.result.away_goals %> - <%= game.result.home_goals %></span><br>
+                <% if game.result.shootout == 1 %>
+                    <span>FINAL(SO)</span>
+                <% elsif game.result.overtime == 1 %>
+                    <span>FINAL(OT)</span>
+                <% else %>
+                    <span>FINAL</span>
                 <% end %>
             <% else %>
                 <% if game.game_time %>
-                    <p><%= game.game_time.date_time.in_time_zone(current_user.time_zone).strftime("%a, %b %-d, %I:%M %P") %>
+                    <p><%= game.game_time.date_time.in_time_zone(current_user.time_zone).strftime("%a, %b %-d") %><br>
+                        <%= game.game_time.date_time.in_time_zone(current_user.time_zone).strftime("%I:%M %P") %>
                         <% if (current_user.id == game.away_team_id or current_user.id == game.home_team_id) %>
                             <%= link_to edit_game_game_time_path(game) do %>
                                 <i class="fas fa-edit edit-icon"></i>
                             <% end %>
                         <% end %>
                     </p>
-                    <p><a href="http://www.google.com/calendar/render?action=TEMPLATE&text=BHL:+<%= User.find(game.away_team_id).team_name %>+vs+<%= User.find(game.home_team_id).team_name %>&dates=<%= game.game_time.date_time.in_time_zone(current_user.time_zone).strftime('%Y%m%dT%H%M') %>/<%= (game.game_time.date_time.in_time_zone(current_user.time_zone) + 35.minutes).strftime('%Y%m%dT%H%M') %>" target="_blank">
-                        Add to Calendar
-                    </a></p>
+                    <div class="mt-2">
+                        <a class="calendar-link btn btn-calendar" href="http://www.google.com/calendar/render?action=TEMPLATE&text=BHL:+<%= User.find(game.away_team_id).team_name %>+vs+<%= User.find(game.home_team_id).team_name %>&dates=<%= game.game_time.date_time.in_time_zone(current_user.time_zone).strftime('%Y%m%dT%H%M') %>/<%= (game.game_time.date_time.in_time_zone(current_user.time_zone) + 35.minutes).strftime('%Y%m%dT%H%M') %>" target="_blank"><i class="far fa-calendar-plus"></i></a>
+                    </div>
                     <% if (current_user.id == game.away_team_id or current_user.id == game.home_team_id) %>
                         <% Time.use_zone(current_user.time_zone) do %>
                             <% if Time.current > game.game_time.date_time %>
@@ -60,18 +52,8 @@
                 <% end %>
             <% end %>
             </td>
-            <td class="d-none d-md-table-cell fw-bold<% if game.result and game.result.away_goals < game.result.home_goals %> won<% end %>">
-                <% if game.result %>
-                    <span><%= game.result.home_goals %></span>
-                <% end %>
-            </td>
             <td class="text-center">
                 <%= User.find(game.home_team_id).team_name %>
-                <% if game.result %>
-                    <div class="d-md-none text-center fw-bold<% if game.result and game.result.away_goals < game.result.home_goals %> won<% end %>">
-                        <%= game.result.home_goals %>
-                    </div>
-                <% end %>
             </td>
         </tr>
     <% end %>

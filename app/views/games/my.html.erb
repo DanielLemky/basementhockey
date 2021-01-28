@@ -1,7 +1,7 @@
 <div class="container">
     <h1>My Games</h1>
     <h2><%= @season.name %> Season</h2>
-    <div class="card">
+    <div id="games-card" class="card">
         <div class="card-body">
             <div class="text-center">
                 <%= link_to 'View All Games', season_games_path(@season) %>
