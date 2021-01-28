@@ -3,9 +3,7 @@
     <% @games = Game.where(week: week_number).where('away_team_id=? OR home_team_id=?', current_user.id, current_user.id) %>
     <tr id="week<%= week_number %>" class="week-counter fw-bold">
         <td></td>
-        <td class="d-none d-md-table-cell"></td>
         <td class="text-center">Week <%= week_number %></td>
-        <td class="d-none d-md-table-cell"></td>
         <td></td>
     </tr>
     <% @games.each do |game| %>

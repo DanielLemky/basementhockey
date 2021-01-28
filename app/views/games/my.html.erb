@@ -3,19 +3,10 @@
     <h2><%= @season.name %> Season</h2>
     <div id="games-card" class="card">
         <div class="card-body">
-            <div class="text-center">
+            <div class="text-center mt-1 mb-4">
                 <%= link_to 'View All Games', season_games_path(@season) %>
             </div>
     <table class="table games">
-        <thead>
-            <tr>
-                <th class="text-center"></th>
-                <th class="d-none d-md-table-cell"></th>
-                <th></th>
-                <th class="d-none d-md-table-cell"></th>
-                <th class="text-center"></th>
-            </tr>
-        </thead>
         <tbody>
             <%= render partial: 'my_game_rows' %>
         </tbody>
