@@ -70,7 +70,7 @@
                 <% end %>
             </td>
             <td class="text-center team-name">
-                <% if User.find(game.away_team_id).twitch %>
+                <% if User.find(game.home_team_id).twitch %>
                     <%= link_to User.find(game.home_team_id).team_name, "https://twitch.tv/#{User.find(game.home_team_id).twitch}", target: "_blank" %>
                 <% else %>
                     <%= User.find(game.home_team_id).team_name %>
