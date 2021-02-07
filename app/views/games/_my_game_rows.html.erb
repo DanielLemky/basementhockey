@@ -1,58 +1,14 @@
 <% @season.length_in_weeks.times do |week_index| %>
     <% week_number = week_index + 1%>
-    <% @games = Game.where(week: week_number).where('away_team_id=? OR home_team_id=?', current_user.id, current_user.id) %>
     <tr id="week<%= week_number %>" class="week-counter fw-bold">
         <td></td>
         <td class="text-center">Week <%= week_number %></td>
         <td></td>
     </tr>
-    <% @games.each do |game| %>
-        <tr>
-            <td class="text-center">
-                <%= User.find(game.away_team_id).team_name %>
-            </td>
-            <td class="text-center game-status fw-bold">
-            <% if game.result %>
-                <span class="game-score"><%= game.result.away_goals %> - <%= game.result.home_goals %></span><br>
-                <% if game.result.shootout == 1 %>
-                    <span>FINAL(SO)</span>
-                <% elsif game.result.overtime == 1 %>
-                    <span>FINAL(OT)</span>
-                <% else %>
-                    <span>FINAL</span>
-                <% end %>
-            <% else %>
-                <% if game.game_time %>
-                    <p><%= game.game_time.date_time.in_time_zone(current_user.time_zone).strftime("%a, %b %-d") %><br>
-                        <%= game.game_time.date_time.in_time_zone(current_user.time_zone).strftime("%I:%M %P") %>
-                        <% if (current_user.id == game.away_team_id or current_user.id == game.home_team_id) %>
-                            <%= link_to edit_game_game_time_path(game) do %>
-                                <i class="fas fa-edit edit-icon"></i>
-                            <% end %>
-                        <% end %>
-                    </p>
-                    <div class="mt-2">
-                        <a class="calendar-link btn btn-calendar" href="http://www.google.com/calendar/render?action=TEMPLATE&text=BHL:+<%= User.find(game.away_team_id).team_name %>+vs+<%= User.find(game.home_team_id).team_name %>&dates=<%= game.game_time.date_time.in_time_zone(current_user.time_zone).strftime('%Y%m%dT%H%M') %>/<%= (game.game_time.date_time.in_time_zone(current_user.time_zone) + 35.minutes).strftime('%Y%m%dT%H%M') %>" target="_blank"><i class="far fa-calendar-plus"></i></a>
-                    </div>
-                    <% if (current_user.id == game.away_team_id or current_user.id == game.home_team_id) %>
-                        <% Time.use_zone(current_user.time_zone) do %>
-                            <% if Time.current > game.game_time.date_time %>
-                                <%= link_to 'Record Result', new_game_result_path(game), class: "btn btn-other record-result mt-2" %>
-                            <% end %>
-                        <% end %>
-                    <% end %>
-                <% else %>
-                    <% if (current_user.id == game.away_team_id or current_user.id == game.home_team_id) %>
-                        <%= link_to 'Schedule Game', new_game_game_time_path(game), class: "btn btn-primary record-result" %>
-                    <% else %>
-                        -
-                    <% end %>
-                <% end %>
-            <% end %>
-            </td>
-            <td class="text-center">
-                <%= User.find(game.home_team_id).team_name %>
-            </td>
-        </tr>
+    <% @games = Game.includes(:game_time).where(week: week_number).where('away_team_id=? OR home_team_id=?', current_user.id, current_user.id).where.not(game_times: {id: nil}).order(:date_time).each do |game| %>
+        <%= render partial: 'row', locals: { game: game } %>
+    <% end %>
+    <% @games = Game.includes(:game_time).where(week: week_number).where('away_team_id=? OR home_team_id=?', current_user.id, current_user.id).where(game_times: {id: nil}).order(:id).each do |game| %>
+        <%= render partial: 'row', locals: { game: game } %>
     <% end %>
 <% end %>
