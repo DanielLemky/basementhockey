@@ -17,6 +17,11 @@
   </div>
 
   <div class="mb-4">
+    <%= f.label 'Twitch ID', class: "form-label" %>
+    <%= f.text_field :twitch, class: "form-control" %>
+  </div>
+
+  <div class="mb-4">
     <%= f.label :time_zone, class: "form-label" %>
     <%= f.time_zone_select :time_zone, nil, {}, { class: "form-select" } %>
   </div>
