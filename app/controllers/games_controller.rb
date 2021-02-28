@@ -4,7 +4,7 @@ class GamesController < ApplicationController
     def new
         @season = Season.find(params[:season_id])
         @game = @season.games.new
-        @teams = @season.users
+        @teams = @season.users.order(:team_name)
     end
 
     def show
@@ -39,7 +39,7 @@ class GamesController < ApplicationController
 
         unless @game.home_team_id == @game.away_team_id
             if @game.save
-                flash.alert = "Success! Game was created."
+                flash.alert = "Success! #{User.find(@game.away_team_id).team_name} vs #{User.find(@game.home_team_id).team_name} was created."
                 if params[:commit] == 'Create Game and New'
                     redirect_to new_season_game_path(@game.season_id)    
                 else
