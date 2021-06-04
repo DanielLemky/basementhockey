@@ -5,11 +5,11 @@
         <% @seasons.each do |season| %>
             <h1><%= season.name %> Season</h1>
             <div class="row">
-                <%= render partial: 'next_game', locals: { season: season } %>
-                <%= render partial: 'current_week', locals: { season: season } %>
-                <%= render partial: 'standings', locals: { season: season } %>
-                <%= render partial: 'latest_results', locals: { season: season } %>
-                <%= render partial: 'upcoming_games', locals: { season: season } %>
+                <%= render 'next_game', season: season %>
+                <%= render 'current_week', season: season %>
+                <%= render 'standings', season: season %>
+                <%= render 'latest_results', season: season %>
+                <%= render 'upcoming_games', season: season %>
             </div>
         <% end %>
 
