@@ -1,5 +1,6 @@
 class ResultsController < ApplicationController
     before_action :authenticate_user!
+    after_action :update_stats, only: [:create]
 
     def new
         @game = Game.find(params[:game_id])
@@ -18,7 +19,6 @@ class ResultsController < ApplicationController
     def create
         @game = Game.find(params[:game_id])
         @result = @game.build_result(result_params)
-        update_stats
 
         if @result.save
             flash.alert = 'Success! Your results have been saved.'
@@ -28,25 +28,26 @@ class ResultsController < ApplicationController
         end
     end
 
-    private
+    protected
         def result_params
             params.permit(:away_goals, :home_goals, :overtime, :shootout, :game_id, :game_photo)
         end
 
-        def winner(result)
-            if result.home_goals < result.away_goals
-                winner = User.find(result.game.away_team_id)
-            else
-                winner = User.find(result.game.home_team_id)
-            end
-        end
+        def update_stats
+            winner_stats = @result.winner.team_stats.find_by(season_id: @game.season_id)
+            loser_stats = @result.loser.team_stats.find_by(season_id: @game.season_id)
 
-        def loser(result)
-            if result.home_goals < result.away_goals
-                loser = User.find(result.game.home_team_id)
-            else
-                loser = User.find(result.game.away_team_id)
-            end
+            winner_stats = add_win_stats(winner_stats)
+            loser_stats = add_loss_stats(loser_stats)
+
+            winner_stats = goal_stats(@result, @result.winner, winner_stats)
+            loser_stats = goal_stats(@result, @result.loser, loser_stats)
+
+            winner_stats.goal_difference = winner_stats.goals_for - winner_stats.goals_against
+            loser_stats.goal_difference = loser_stats.goals_for - loser_stats.goals_against
+
+            winner_stats.save
+            loser_stats.save
         end
 
         def add_win_stats(team_stats)
@@ -65,35 +66,20 @@ class ResultsController < ApplicationController
             team_stats
         end
 
-        def update_stats
-            winner_stats = winner(@result).team_stats.find_by(season_id: @game.season_id)
-            loser_stats = loser(@result).team_stats.find_by(season_id: @game.season_id)
-
-            winner_stats = add_win_stats(winner_stats)
-            loser_stats = add_loss_stats(loser_stats)
-
-
-            if @result.home_goals < @result.away_goals
-                # away won
-                winner_stats.goals_for = winner_stats.goals_for + @result.away_goals
-                loser_stats.goals_for = loser_stats.goals_for + @result.home_goals
-
-                winner_stats.goals_against = winner_stats.goals_against + @result.home_goals
-                loser_stats.goals_against = loser_stats.goals_against + @result.away_goals
+        def goal_stats(result, team, team_stats)
+            # Goals For
+            if team == result.game.home_team
+                team_stats.goals_for = team_stats.goals_for + result.home_goals
             else
-                # home won
-                winner_stats.goals_for = winner_stats.goals_for + @result.home_goals
-                loser_stats.goals_for = loser_stats.goals_for + @result.away_goals
-
-                winner_stats.goals_against = winner_stats.goals_against + @result.away_goals
-                loser_stats.goals_against = loser_stats.goals_against + @result.home_goals
+                team_stats.goals_for = team_stats.goals_for + result.away_goals
             end
-            winner_stats.goal_difference = winner_stats.goals_for - winner_stats.goals_against
-            loser_stats.goal_difference = loser_stats.goals_for - loser_stats.goals_against
 
-
-            winner_stats.save
-            loser_stats.save
-            
+            # Goals Against
+            if team == result.game.home_team
+                team_stats.goals_against = team_stats.goals_against + result.away_goals
+            else
+                team_stats.goals_against = team_stats.goals_against + result.home_goals
+            end
+            team_stats
         end
 end
