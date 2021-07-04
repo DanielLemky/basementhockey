@@ -12,4 +12,13 @@ class Game < ApplicationRecord
     def away_team
         User.find(away_team_id)
     end
+
+    def users_season_games(season_id, user)
+        Game.where(season_id: season.id).where('away_team_id=? OR home_team_id=?', user.id, user.id)
+    end
+
+    def game_number(season_id, user)
+        users_season_games(season_id, user).find_index(self)
+    end
+
 end
