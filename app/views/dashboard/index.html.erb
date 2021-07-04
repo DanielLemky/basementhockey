@@ -5,7 +5,9 @@
         <% @seasons.each do |season| %>
             <h1><%= season.name %> Season</h1>
             <div class="row">
-                <%= render 'next_game', season: season %>
+                <% unless season.closed? %>
+                    <%= render 'next_game', season: season %>
+                <% end %>
                 <%= render 'current_week', season: season %>
                 <%= render 'standings', season: season %>
                 <%= render 'latest_results', season: season %>
