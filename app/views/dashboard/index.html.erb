@@ -21,7 +21,7 @@
 
     <% end %>
 
-    <% if current_user.email == 'daniel@lemky.ca' %>
+    <% if current_user.super_admin? %>
         <%= render 'admin' %>
     <% end %>
 
