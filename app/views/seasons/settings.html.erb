@@ -1,0 +1,85 @@
+<div class="container">
+    <h1><%= @season.name %> Season</h1>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h3 class="card-title">Settings</h3>
+                        </div>
+                        <div class="col text-end">
+                            <span><%= link_to 'Edit', edit_season_path(@season) %></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <th>Type</th>
+                                        <td><%= @season.season_type.capitalize %></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Start Date</th>
+                                        <td><%= @season.start_date.strftime("%B %-d, %Y") %></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Season Length</th>
+                                        <td><%= @season.length_in_weeks %> Week(s)</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Games Per Week Per Team</th>
+                                        <td><%= @season.games_per_week %></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Games Created</th>
+                                        <td><%= @season.games.size %></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Games Played</th>
+                                        <td><%= @season.results.size %></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <% if current_user.super_admin? %>
+                        <div class="admin text-center">
+                            <% if @season.users.size > 1 %>
+                                <%= link_to "Add Games to Season", new_season_game_path(@season), class: "btn btn-primary" %>
+                            <% else %>
+                                <div class="alert alert-primary">
+                                    <span>Add at least two users to add games to this season</span>
+                                </div>
+                            <% end %>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="card overflow-scroll">
+                <div class="card-body">
+                    <h3 class="card-title">Users</h3>
+                    <table class="table">
+                        <tbody>
+                            <% @season.users.order(:first_name).each do |user| %>
+                                <tr>
+                                    <td><%= user.first_name %> <%= user.last_name %></td>
+                                    <td><%= user.email %></td>
+                                    <td><%= user.team_name %></td>
+                                </tr>
+                            <% end %>
+                        </tbody>
+                    </table>
+                    <% if current_user.super_admin? %>
+                        <div class="admin text-center">
+                            <%= link_to "Add Users to Season", season_new_user_path(@season), class: "btn btn-primary" %>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

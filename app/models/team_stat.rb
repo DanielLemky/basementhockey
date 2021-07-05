@@ -34,4 +34,8 @@ class TeamStat < ApplicationRecord
         end
     end
 
+    def record
+        record = "#{self.wins}-#{self.losses}-#{self.overtime_losses}"
+    end
+
 end

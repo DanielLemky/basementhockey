@@ -2,18 +2,19 @@
 
     <% if @seasons.any? %>
 
-        <% @seasons.each do |season| %>
-            <h1><%= season.name %> Season</h1>
-            <div class="row">
-                <% unless season.closed? %>
-                    <%= render 'next_game', season: season %>
-                <% end %>
-                <%= render 'current_week', season: season %>
-                <%= render 'standings', season: season %>
-                <%= render 'latest_results', season: season %>
-                <%= render 'upcoming_games', season: season %>
-            </div>
-        <% end %>
+        <div class="row">
+            <% @seasons.each do |season| %>
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h2 class="card-title"><%= link_to "#{season.name} Season", season %></h2>
+                            <p><%= season.current_week %></p>
+                            <p>Record: <%= TeamStat.find_by(user_id: current_user.id, season_id: season.id).record %></p>
+                        </div>
+                    </div>
+                </div>
+            <% end %>
+        </div>
 
     <% else %>
 
